@@ -1,0 +1,170 @@
+<!-- visionary/templates/visionary.html -->
+{% extends 'base.html' %}
+
+{% block title %}Visionary{% endblock %}
+
+{% block toggle_position %}left{% endblock %}
+
+{% block head_extra %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #visionary-app {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 60px; /* Height of the toggle bar */
+            box-sizing: border-box;
+        }
+        #galaxy-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        @keyframes pulsate {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        .mic-button-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+        }
+        .mic-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            background-color: white;
+            border-radius: 50%;
+            padding: 0.5rem;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mic-button-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background-color: #3B82F6;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .mic-button-wrapper.recording::before {
+            opacity: 1;
+            animation: pulsate 1.5s ease-in-out infinite;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="galaxy-background"></div>
+    <div id="visionary-app">
+        <div id="app" class="w-full max-w-md bg-white bg-opacity-80 rounded-xl shadow-md overflow-hidden">
+            <div class="p-6 space-y-6">
+                <div id="errorMessage" class="hidden text-red-500 text-center"></div>
+                <div id="startMessage" class="text-green-500 text-center mt-4">App is ready. Tap or shake to start.</div>
+                <div class="text-center">
+                    <div id="micBtnWrapper" class="mic-button-wrapper">
+                        <button id="micBtn" class="mic-button text-4xl text-blue-500 hover:text-blue-600 transition-all duration-300 ease-in-out">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('visionary_static', path='visionary.js') }}"></script>
+    <script>
+        // Three.js galaxy background
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('galaxy-background').appendChild(renderer.domElement);
+
+        // Create stars
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsMaterial = new THREE.PointsMaterial({color: 0xFFFFFF, size: 2, sizeAttenuation: true});
+
+        const starsVertices = [];
+        for (let i = 0; i < 10000; i++) {
+            const x = (Math.random() - 0.5) * 2000;
+            const y = (Math.random() - 0.5) * 2000;
+            const z = -Math.random() * 2000;
+            starsVertices.push(x, y, z);
+        }
+
+        starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+        const starField = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(starField);
+
+        camera.position.z = 1;
+
+        // Mouse interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', onDocumentMouseMove);
+
+        function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - windowHalfX);
+            mouseY = (event.clientY - windowHalfY);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            targetX = mouseX * .001;
+            targetY = mouseY * .001;
+
+            starField.rotation.y += 0.0002 + (targetX - starField.rotation.y) * .01;
+            starField.rotation.x += (targetY - starField.rotation.x) * .01;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle window resize
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        window.addEventListener('resize', onWindowResize);
+    </script>
+{% endblock %}
