@@ -43,6 +43,7 @@ visionary_mate/
     │   └── visionary.html
     └── static/
         └── visionary.js
+```
 
  RAG=>
 
@@ -127,4 +128,4 @@ Contact
 For any questions or feedback, please contact [your email].
 
 Make sure to replace `flowchart.png` with the actual file name and path of the image you uploaded. Also, update the `yourusername` and `your email` placeholders with your actual GitHub username and email address.
-```
+
