@@ -1,6 +1,6 @@
 
 Here is the updated README.md file with the image and the flowchart description:
-MarkDown
+
 # Visionary Mate
 
 Visionary Mate is a comprehensive web application that combines the functionalities of two projects—Multimodal Mate and Visionary—into a single platform. It provides multimodal assistance through text, images, audio, and documents, leveraging advanced AI models and APIs for real-time, context-aware responses.
@@ -45,9 +45,10 @@ visionary_mate/
     │   └── visionary.html
     └── static/
         └── visionary.js
-Naive RAG - Deep Dive
 
-!
+ RAG=>
+<img width="895" alt="Screenshot 2024-10-13 at 9 48 30 PM" src="https://github.com/user-attachments/assets/9f1365e4-31de-42b5-a16d-d4f79be8a2a3">
+
 The flowchart above illustrates the Naive RAG pipeline used in Visionary Mate. The pipeline is divided into two sections: "Indexing" and "Augment".
 Indexing
 
