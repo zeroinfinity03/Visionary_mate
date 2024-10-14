@@ -1,6 +1,4 @@
 
-Here is the updated README.md file with the image and the flowchart description:
-
 # Visionary Mate
 
 Visionary Mate is a comprehensive web application that combines the functionalities of two projects—Multimodal Mate and Visionary—into a single platform. It provides multimodal assistance through text, images, audio, and documents, leveraging advanced AI models and APIs for real-time, context-aware responses.
