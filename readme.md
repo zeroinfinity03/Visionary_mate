@@ -47,7 +47,7 @@ visionary_mate/
         └── visionary.js
 
  RAG=>
-<img width="895" alt="Screenshot 2024-10-13 at 9 48 30 PM" src="https://github.com/user-attachments/assets/9f1365e4-31de-42b5-a16d-d4f79be8a2a3">
+<img src="https://github.com/user-attachments/assets/9f1365e4-31de-42b5-a16d-d4f79be8a2a3" alt="Screenshot" width="895">
 
 The flowchart above illustrates the Naive RAG pipeline used in Visionary Mate. The pipeline is divided into two sections: "Indexing" and "Augment".
 Indexing
