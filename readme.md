@@ -112,6 +112,7 @@ Env:
 
 GOOGLE_API_KEY=your_google_api_key_here
 PERPLEXITY_API_KEY=your_perplexity_api_key_here
+
 GOOGLE_APPLICATION_CREDENTIALS=credentials/google_cloud_credentials.json
 
 
