@@ -88,45 +88,56 @@ Document ranking
 Answer generation
 Setup and Installation
 
-Clone the Repository:
+#### Clone the Repository:
+
 Bash
+
 git clone https://github.com/yourusername/visionary_mate.git
 cd visionary_mate
+
+
 Install Dependencies:
+
 Bash
 pip install -r requirements.txt
+
+
 Environment Variables:
+
 Create a .env file in the root directory.
 Add your API keys and other environment variables. Example .env content:
-Env
+
+
+Env:
+
 GOOGLE_API_KEY=your_google_api_key_here
 PERPLEXITY_API_KEY=your_perplexity_api_key_here
 GOOGLE_APPLICATION_CREDENTIALS=credentials/google_cloud_credentials.json
+
+
 Run the Application:
+
 Bash
+
 uvicorn main:app --reload
 Access the Application:
 Open your browser and go to http://127.0.0.1:8000.
+
+
 Usage
 
 Visionary: Provides real-time assistance for visually impaired users.
 Multimodal Mate: Handles text, image, and document-based queries.
+
+
 Troubleshooting
 
 If you encounter issues with API keys, ensure that you have enabled the correct APIs in the Google Cloud Console.
 If you encounter issues with dependencies, try updating requirements.txt and running pip install -r requirements.txt again.
+
+
 Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.
-Changelog
 
-[Insert changes and updates here]
-License
-
-This project is licensed under the MIT License.
-Contact
-
-For any questions or feedback, please contact [your email].
-
-Make sure to replace `flowchart.png` with the actual file name and path of the image you uploaded. Also, update the `yourusername` and `your email` placeholders with your actual GitHub username and email address.
 
