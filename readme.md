@@ -73,6 +73,7 @@ The flowchart above illustrates the Naive RAG pipeline used in Visionary Mate. T
 Indexing
 
 The "Indexing" section shows the process of indexing documents, which involves the following steps:
+
 Tokenization
 Stopword removal
 Stemming
